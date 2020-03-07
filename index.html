@@ -1,46 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<script src="index.js"></script>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="ghpages-materialize.css">
+  <script src="index.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body id ="fullBody">
-    
-    <nav>
-        <div class="nav-wrapper">
-            
-         <p class="app-name">Best Food App</p>
-        
-          <ul id="nav-mobile" class="right hide-on-med-and-down">          
-            <li><a href="">Cart <span class="new badge">4</span></a></li>
-          </ul>
-        </div>
-      </nav>
-   
-    <div class="row">
-        <div class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">textsms</i>
-            </br>
-              <input type="text" id="autocomplete-input"  onkeyup="searchRecipes()" class="autocomplete">
-            </div>
-          </div>
-        </div>
-      </div>
-      
-</br>
-<div class="categoriesDiv" id="categoriesDivId">
 
-</div>
-<div id ="recipesList" >
-  
-</div>
-</div>
+<body id="fullBody">
+  <nav>
+    <div class="nav-wrapper">
+      <p class="app-name">Best Food App</p>
+    </div>
+  </nav>
+
+  <div class="cart"><a href="">Cart <span class="new badge">4</span></a></div>
+
+  <div id="FavRecipesList">
+
+  </div>
+
+  <div class="search-box">
+    <input placeholder="Search" type="text" id="autocomplete-input" onkeyup="searchRecipes()" class="autocomplete">
+  </div>
+
+  <div class="categories-div" id="CategoriesDivId">
+
+  </div>
+
+  <div id="recipesList">
+
+  </div>
+  </div>
 
 </body>
+
 </html>

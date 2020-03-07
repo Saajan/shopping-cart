@@ -1,82 +1,147 @@
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .categoriesDiv {
-    overflow: hidden;
-    background-color: #f1f1f1;
-  }
-  
-  .categoriesDiv a {
-    float: left;
-    display: block;
-    color: #040404;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  .categoriesDiv a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .categoriesDiv a.active {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .categoriesDiv .icon {
-    display: none;
-  }
-  
-  @media screen and (max-width: 600px) {
-    .categoriesDiv a:not(:first-child) {display: none;}
-    .categoriesDiv a.icon {
-      float: right;
-      display: block;
-    }
-  }
-  
-  @media screen and (max-width: 600px) {
-    .categoriesDiv.responsive {position: relative;}
-    .categoriesDiv.responsive .icon {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .categoriesDiv.responsive a {
-      float: none;
-      display: block;
-      text-align: left;
-    }
-  }
-  #recipesImage{
-      width: 400px;
-      height: 210px;
-      float:clear;
-  }
-  .categoryName{
-    font-size: 12px;
-  font-weight: 800;
-  width: 287px;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #eee;
 }
-  
-    .recipesUl{
-       display: flex;
-       flex-wrap: wrap;
-       align-items: center;
-       justify-content: space-between;
-       list-style: none;
-       text-decoration: none;
-       margin: 20px;
-   }
 
-   .addToCart {
-    background-color: #418c46;
-    margin-left: 40px;
-    padding: 4px;
-    color: white;
-   }
+p {
+  margin: 0px;
+}
+
+nav {
+  background-color: #418c46;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75px;
+}
+
+.app-name {
+  text-align: center;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.cart {
+  position: fixed;
+  top: 30px;
+  right: 10px;
+}
+
+.search-box {
+  margin: 15px;
+}
+
+.search-box input {
+  width: 100%;
+  height: 30px;
+  border: 0px;
+  font-size:21px;
+  border-bottom: 2px solid #777676;
+  background: #eee;
+  outline:0;
+}
+
+.categories-div {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+}
+
+.categories-div .category {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  width: 200px;
+  height: 60px;
+  margin: 0px 10px;
+  justify-content: space-around;
+  padding: 5px 15px;
+  border: 1px solid #fff;
+  text-transform: uppercase;
+  box-shadow: 2px 4px 13px rgba(0, 0, 0, 0.1);
+}
+
+.categories-div .category img {
+  width: 30px;
+  height: 30px;
+}
+
+#FavRecipesList .recipesUl {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+  text-decoration: none;
+  margin: 20px;
+}
+
+.recipesUl {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  text-decoration: none;
+  margin: 20px;
+}
+
+.recipesUl li {
+  margin: 15px;
+  background-color: #fff;
+  border-radius: 3px;
+  min-width: 320px;
+  max-width: 450px;
+  box-shadow: 2px 4px 13px rgba(0, 0, 0, 0.1);
+}
+
+.recipesUl li .description {
+  height: 75px;
+  padding: 0px 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recipesUl li .category-name {
+  margin: 0px;
+  font-weight: 500;
+}
+
+.recipesUl li img {
+  border-style: none;
+  width: 100%;
+  height: auto;
+}
+
+.recipesUl li .description .add-to-cart {
+  margin-left: 40px;
+  width: 120px;
+  border: none;
+  font-size: 14px;
+  outline: 0;
+  border-radius: 2px;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 16px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  color: #fff;
+  background-color: #418c46;
+  text-align: center;
+  letter-spacing: .5px;
+  -webkit-transition: background-color .2s ease-out;
+  transition: background-color .2s ease-out;
+  cursor: pointer
+}
