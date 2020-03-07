@@ -17,24 +17,22 @@ var recipes = [];
         });
 }();
 
+let timeout = null;
 function searchRecipes() {
-    let inputValue = document.getElementById("autocomplete-input").value;
-    var searchTerm = inputValue;
-    console.log(inputValue);
-    let matchedTerms = [];
-    searchTerm = searchTerm.toLowerCase();
-    // -----------------ans1--------------------
-    matchedTerms = recipes.filter(function (i) {
-        return i.name.toLowerCase().indexOf(searchTerm) > -1;
-    });
-    createRecipesList(matchedTerms);
-}
 
-function createFavorites(recipesList) {
-    let favRecipeList = recipesList.filter((recipe) => recipe.isFavourite);
-    let recipesListElement = createRecipeCard(favRecipeList, "favourite");
-    const recipesListDiv = document.getElementById("FavRecipesList");
-    recipesListDiv.appendChild(recipesListElement);
+    // delay one sec before search such that wont have to make autocomplete every key stroke
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+        let inputValue = document.getElementById("autocomplete-input").value;
+        var searchTerm = inputValue;
+        console.log(inputValue);
+        let matchedTerms = [];
+        searchTerm = searchTerm.toLowerCase();
+        matchedTerms = recipes.filter(function (i) {
+            return i.name.toLowerCase().indexOf(searchTerm) > -1;
+        });
+        createRecipesList(matchedTerms);
+    }, 1000);
 }
 
 function createCategory(categoriesList) {
@@ -56,9 +54,25 @@ function createCategory(categoriesList) {
     }
 }
 
+function createFavorites(recipesList) {
+    let favRecipeList = recipesList.filter((recipe) => recipe.isFavourite);
+    let recipesListElement = createRecipeCard(favRecipeList, "favourite");
+    const recipesListDiv = document.getElementById("FavRecipesList");
+    recipesListDiv.appendChild(recipesListElement);
+}
+
 function createRecipesList(recipesList) {
-    let recipesListElement = createRecipeCard(recipesList, "category");
+    // remove old cards in the dom
+    document.getElementById("recipesList").innerHTML = "";
     const recipesListDiv = document.getElementById("recipesList");
+    let recipesListElement;
+    if (recipesList.length <= 0) {
+        recipesListElement = document.createElement("div");
+        recipesListElement.className = "no-dish";
+        recipesListElement.innerHTML = "NO DISH";
+    } else {
+        recipesListElement = createRecipeCard(recipesList, "category");
+    }
     recipesListDiv.appendChild(recipesListElement);
 }
 
