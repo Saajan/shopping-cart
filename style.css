@@ -28,8 +28,8 @@ nav {
 
 .cart {
   position: fixed;
-  top: 30px;
-  right: 10px;
+  top: 100px;
+  right: 25px;
 }
 
 .search-box {
@@ -99,7 +99,15 @@ nav {
   text-decoration: none;
   margin: 20px;
 }
-
+.recipesDescriptionUl {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  text-decoration: none;
+  margin: 20px;
+}
 .recipesUl li {
   margin: 15px;
   background-color: #fff;
@@ -109,7 +117,40 @@ nav {
   box-shadow: 2px 4px 13px rgba(0, 0, 0, 0.1);
 }
 
+.recipesDescriptionUl li {
+  margin: 15px;
+  background-color: #fff;
+  border-radius: 3px;
+  min-width: 400px;
+  max-width: 610px;
+  box-shadow: 2px 4px 13px rgba(0, 0, 0, 0.1);
+}
 .recipesUl li .description {
+  height: 75px;
+  padding: 0px 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.recipesDescriptionUl li .description {
+  height: 75px;
+  padding: 0px 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recipesDescriptionUl li .details {
+  padding: 0px 10px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.recipesDescriptionUl li .rating {
   height: 75px;
   padding: 0px 10px;
   font-weight: 700;
@@ -123,13 +164,21 @@ nav {
   margin: 0px;
   font-weight: 500;
 }
-
+.recipesDescriptionUl li .category-name {
+  margin: 0px;
+  font-weight: 500;
+}
 .recipesUl li img {
   border-style: none;
   width: 100%;
   height: auto;
 }
 
+.recipesDescriptionUl li img {
+  border-style: none;
+  width: 100%;
+  height: auto;
+}
 .recipesUl li .description .add-to-cart {
   margin-left: 40px;
   width: 120px;
@@ -152,4 +201,59 @@ nav {
   -webkit-transition: background-color .2s ease-out;
   transition: background-color .2s ease-out;
   cursor: pointer
+}
+
+.recipesDescriptionUl li .description .add-to-cart {
+  margin-left: 40px;
+  width: 120px;
+  border: none;
+  font-size: 14px;
+  outline: 0;
+  border-radius: 2px;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 16px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  color: #fff;
+  background-color: #418c46;
+  text-align: center;
+  letter-spacing: .5px;
+  -webkit-transition: background-color .2s ease-out;
+  transition: background-color .2s ease-out;
+  cursor: pointer
+}
+.recipesDescriptionUl li .rating .add-to-cart {
+  margin-left: 40px;
+  width: 120px;
+  border: none;
+  font-size: 14px;
+  outline: 0;
+  border-radius: 2px;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 16px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  color: #fff;
+  background-color: #418c46;
+  text-align: center;
+  letter-spacing: .5px;
+  -webkit-transition: background-color .2s ease-out;
+  transition: background-color .2s ease-out;
+  cursor: pointer
+}
+
+.categories-hide{
+  display: none;
+}
+
+.favoritesText{
+  margin-left: 76px;
 }

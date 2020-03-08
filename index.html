@@ -16,20 +16,28 @@
     </div>
   </nav>
 
-  <div class="cart"><a href="">Cart <span class="new badge">4</span></a></div>
-
-  <div id="FavRecipesList">
+  <div class="cart"><i class="material-icons">shopping_cart</i><span class="new badge">4</span></div>
+<div> 
+    <div class = "favoritesText">
+    <h3>Favorites</h3>
+    <p>Enjoy What you have been ordering</p>
+    </div>
+    <div id="FavRecipesList">
 
   </div>
+</div>
 
   <div class="search-box">
     <input placeholder="Search" type="text" id="autocomplete-input" onkeyup="searchRecipes()" class="autocomplete">
   </div>
 
+  <div class = "favoritesText">
+    <h3>Select Categories</h3>  
+    <button onclick= "searchByCategory('iced')">category</button>
   <div class="categories-div" id="CategoriesDivId">
 
   </div>
-
+</div>
   <div id="recipesList">
 
   </div>
