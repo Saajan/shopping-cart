@@ -2,7 +2,7 @@ var categories = [];
 var recipes = [];
 
 !async function () {
-    let data = await fetch("http://temp.dash.zeta.in/food.php")
+    await fetch("http://temp.dash.zeta.in/food.php")
         .then((response) => response.json())
         .then(data => {
             categories = data.categories;
@@ -10,7 +10,6 @@ var recipes = [];
             createFavorites(recipes);
             createCategory(categories);
             createRecipesList(recipes);
-            return categories, recipes;
         })
         .catch(error => {
             console.error(error);
@@ -30,38 +29,33 @@ function searchRecipes() {
         searchTerm = searchTerm.toLowerCase();
         console.log("recipes", recipes)
         matchedTerms = recipes.filter(function (i) {
-            return (i.name.toLowerCase().indexOf(searchTerm) > -1) ;
-        });
-        createRecipesList(matchedTerms);
-    }, 1000);
-}
-
-function searchByCategory(categoryName) {
-
-    // delay one sec before search such that wont have to make autocomplete every key stroke
-    clearTimeout(timeout);
-    timeout = setTimeout(function () {
-       // 
-        var searchTerm = categoryName;
-        console.log(categoryName);
-        let matchedTerms = [];
-        searchTerm = searchTerm.toLowerCase();
-        console.log("recipes", recipes)
-        matchedTerms = recipes.filter(function (i) {
-           // return ((i.name.toLowerCase()) && (i.category.toLowerCase()).indexOf(searchTerm) > -1) ;
-           return (i.name.toLowerCase().indexOf(searchTerm) > -1) ;
+            return (i.name.toLowerCase().indexOf(searchTerm) > -1);
         });
         createRecipesList(matchedTerms);
     }, 1000);
 }
 
 function createCategory(categoriesList) {
-    console.log(categoriesList);
     const categoriesElement = document.getElementById("CategoriesDivId");
+    categoriesList.unshift({
+        name: "All",
+        image: ""
+    });
     // categories view
     for (let i = 0; i < categoriesList.length; i++) {
         let aElement = document.createElement("a");
-        aElement.className = "categories-a";
+        if (i == 0) {
+            aElement.className = "categories-a active";
+        } else {
+            aElement.className = "categories-a";
+        }
+        aElement.onclick = function () {
+            Array.from(document.getElementById("CategoriesDivId").children).forEach(function (elem) {
+                elem.classList.remove("active");
+            })
+            this.className = "categories-a active";
+            filterCategory(recipes, categoriesList[i].name);
+        }
         let categoryElement = document.createElement("div");
         categoryElement.className = "category";
         let imgElement = document.createElement("img");
@@ -82,23 +76,43 @@ function createFavorites(recipesList) {
     recipesListDiv.appendChild(recipesListElement);
 }
 
+
+function filterCategory(recipesList, filterType) {
+    document.getElementById("recipesList").innerHTML = "";
+    let filteredRecipeList;
+    if (filterType == "All") {
+        filteredRecipeList = recipesList;
+    } else {
+        filteredRecipeList = recipesList.filter((recipe) => recipe.category == filterType);
+    }
+    let timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+        const recipesListDiv = document.getElementById("recipesList");
+        let recipesListElement;
+        if (filteredRecipeList.length <= 0) {
+            recipesListElement = document.createElement("div");
+            recipesListElement.className = "no-dish";
+            recipesListElement.innerHTML = "NO DISH";
+        } else {
+            recipesListElement = createRecipeCard(filteredRecipeList, "category");
+        }
+        recipesListDiv.appendChild(recipesListElement);
+    }, 500);
+}
+
 function createRecipesList(recipesList) {
-    // remove old cards in the dom
-    console.log(recipesList);
     document.getElementById("recipesList").innerHTML = "";
     const recipesListDiv = document.getElementById("recipesList");
     let recipesListElement;
-    let recipesDescriptionElement;
     if (recipesList.length <= 0) {
         recipesListElement = document.createElement("div");
         recipesListElement.className = "no-dish";
         recipesListElement.innerHTML = "NO DISH";
     } else {
-       recipesListElement = createRecipeCard(recipesList, "category");
-        recipesDescriptionElement = createRecipeCardDescription(recipesList, "category");
+        recipesListElement = createRecipeCard(recipesList, "category");
     }
     recipesListDiv.appendChild(recipesListElement);
-    recipesListDiv.appendChild(recipesDescriptionElement);
 }
 
 function createRecipeCard(recipesList, recipeType) {
@@ -131,8 +145,8 @@ function createRecipeCard(recipesList, recipeType) {
             addToCart.innerHTML = "REORDER";
         } else {
             addToCart.innerHTML = "ADD TO BAG";
-        }     
-        
+        }
+
         descriptionLeftNode.appendChild(addToCart);
 
         descriptionNode.appendChild(descriptionRightNode);
@@ -144,7 +158,7 @@ function createRecipeCard(recipesList, recipeType) {
 };
 
 function createRecipeCardDescription(recipesList, recipeType) {
-    console.log("here",recipesList);
+    console.log("here", recipesList);
     let ulElement = document.createElement("ul");
     ulElement.className = "recipesDescriptionUl"
     for (let i = 0; i < 1; i++) {
@@ -172,22 +186,22 @@ function createRecipeCardDescription(recipesList, recipeType) {
         let descriptionLeftNode = document.createElement("div");
         let addToCart = document.createElement("button");
         addToCart.className = "add-to-cart";
-      
-            addToCart.innerHTML = "ADD TO BAG";
-          
-        
+
+        addToCart.innerHTML = "ADD TO BAG";
+
+
         descriptionLeftNode.appendChild(addToCart);
 
         let recipesDivNode = document.createElement("div");
         let recipesTitleNode = document.createElement("h4");
-        recipesTitleNode.innerHTML = "Category:" + " " +recipesList[i].category;
+        recipesTitleNode.innerHTML = "Category:" + " " + recipesList[i].category;
         recipesTitleNode.className = "category-name";
         recipesDivNode.appendChild(recipesTitleNode);
-        
+
         let descriptionRatingNode = document.createElement("div");
         let titleRatingNode = document.createElement("h4");
-       
-        titleRatingNode.innerHTML = "&#11088;" + recipesList[i].rating+".0" + " Ratings,"+ "  " + "("+recipesList[i].reviews  + "" + "Reviews)";
+
+        titleRatingNode.innerHTML = "&#11088;" + recipesList[i].rating + ".0" + " Ratings," + "  " + "(" + recipesList[i].reviews + "" + "Reviews)";
 
         descriptionRatingNode.appendChild(titleRatingNode);
 
@@ -200,19 +214,19 @@ function createRecipeCardDescription(recipesList, recipeType) {
 
         detailsDivNode.appendChild(detailsTitleNode);
         detailsDivNode.appendChild(detailsContentNode);
-       
+
         descriptionLeftNode.appendChild(addToCart);
-        
+
         descriptionNode.appendChild(descriptionRightNode);
         descriptionNode.appendChild(descriptionLeftNode);
-        
+
         ratingNode.appendChild(recipesDivNode);
         ratingNode.appendChild(descriptionRatingNode);
 
         liElement.appendChild(descriptionNode);
         liElement.appendChild(ratingNode);
         liElement.appendChild(detailsDivNode);
-        
+
         ulElement.appendChild(liElement);
     }
     return ulElement;
